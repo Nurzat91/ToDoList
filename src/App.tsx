@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
 
-  const [inputValue, setInputValue] = useState('');
+  const [currentTask, setCurrentTask] = useState('');
   const [tasks, setTasks] = useState([
     {id: '1', text: 'Task 1'},
     {id: '2', text: 'Task 2'},
@@ -15,21 +15,21 @@ function App() {
   const maxId = Math.max(...tasks.map((task) => parseInt(task.id, 10)));
   const [nextId, setNextId] = useState(maxId + 1);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    setCurrentTask(event.target.value);
   };
 
   const handleSubmit = () => {
-    if (inputValue.trim() === '') {
+    if (currentTask.trim() === '') {
       return;
     }
 
     const newTask = {
       id: String(nextId),
-      text: inputValue,
+      text: currentTask,
     };
 
     setTasks([...tasks, newTask]);
-    setInputValue('');
+    setCurrentTask('');
     setNextId(nextId + 1);
   };
 
@@ -41,7 +41,7 @@ function App() {
   return (
     <>
       <AddTaskForm
-        inputValue={inputValue}
+        inputValue={currentTask}
         onInputChange={handleInputChange}
         onBtnClick={handleSubmit}
       />

@@ -17,6 +17,13 @@
   margin-right: 15px;
 }
 
-/*.iconDelete::before {*/
-/*  content: U+F78B;*/
-/*}*/
+.task {
+  border: 1px solid grey;
+  margin: 10px auto;
+  border-radius: 5px;
+  width: 590px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 7px;
+}
