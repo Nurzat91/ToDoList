@@ -3,7 +3,6 @@ import Task from './Task/Task';
 import React, {useState} from 'react';
 import './App.css';
 
-
 function App() {
 
   const [inputValue, setInputValue] = useState('');
@@ -12,6 +11,9 @@ function App() {
     {id: '2', text: 'Task 2'},
     {id: '3', text: 'Task 3'},
   ]);
+
+  const maxId = Math.max(...tasks.map((task) => parseInt(task.id, 10)));
+  const [nextId, setNextId] = useState(maxId + 1);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
@@ -22,12 +24,13 @@ function App() {
     }
 
     const newTask = {
-      id: String(Math.random()),
+      id: String(nextId),
       text: inputValue,
     };
 
     setTasks([...tasks, newTask]);
     setInputValue('');
+    setNextId(nextId + 1);
   };
 
   const handleDeleteTask = (taskId: string) => {
@@ -35,11 +38,10 @@ function App() {
     setTasks(updatedTasks);
   };
 
-
   return (
     <>
       <AddTaskForm
-        value={inputValue}
+        inputValue={inputValue}
         onInputChange={handleInputChange}
         onBtnClick={handleSubmit}
       />
